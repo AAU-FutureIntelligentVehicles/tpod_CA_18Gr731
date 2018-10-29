@@ -6,4 +6,4 @@ JS_servertest.py
 - save features to files
 
 plotserverdates.py
-- plot the features
+- plot the datas of the tests
