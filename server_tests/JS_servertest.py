@@ -30,12 +30,11 @@ def process_frame(client, test_nbr):
 
     i = 0
     while i < test_nbr:
-        print i
         stdin, stdout, stderr = client.exec_command('bash')
         t1 = time.time()
         sftp.put("/Users/reiserbalazs/Desktop/Project/pictures/picture0.png", "/dev/shm/breise18/testy.png")
         t2 = time.time()
-        stdin.write("touch /dev/shm/breise18/1.txt \n")
+        stdin.write("touch /dev/shm/breise18/flag.txt \n")
         stdin.flush()
         t3 = time.time()
         while True:
@@ -43,7 +42,7 @@ def process_frame(client, test_nbr):
             stdin.flush()
             recieved = stdout.channel.recv(2048).split()
 
-            if not (b'1.txt' in recieved):
+            if not (b'flag.txt' in recieved):
                 break
         stdin.write("exit\n")
         stdin.flush()
@@ -57,22 +56,21 @@ def process_frame(client, test_nbr):
         get_times = np.append(get_times, t5 - t4)
         total_times = np.append(total_times, t5 - t1)
 
+        print i
         i = i+1
 
     stdin, stdout, stderr = client.exec_command('bash')
     stdin.write("touch /dev/shm/breise18/end.txt \n")
     stdin.flush()
-    stdin.write("touch /dev/shm/breise18/1.txt \n")
+    stdin.write("touch /dev/shm/breise18/flag.txt \n")
     stdin.flush()
-
-    time.sleep(1)
     sftp.close()
 
-    np.save("js1p.npy", put_times)
-    np.save("js1t.npy", txt_times)
-    np.save("js1h.npy", haralick_times)
-    np.save("js1g.npy", get_times)
-    np.save("js1total", total_times)
+    np.save("js4p.npy", put_times)
+    np.save("js4t.npy", txt_times)
+    np.save("js4h.npy", haralick_times)
+    np.save("js4g.npy", get_times)
+    np.save("js4total.npy", total_times)
 
     print "PUT\n", put_times, "\n\n"
     print "TXT\n", txt_times, "\n\n"
@@ -81,5 +79,5 @@ def process_frame(client, test_nbr):
     print "TOTAL\n", total_times, "\n\n"
 
 
-ssh = createSSHClient("js1.es.aau.dk", 22, "breise18", "")
+ssh = createSSHClient("js4.es.aau.dk", 22, "breise18", "")
 process_frame(ssh, 100)
