@@ -2,6 +2,8 @@ import paramiko
 import time
 import numpy as np
 
+server = "js1"
+
 
 def createSSHClient(server, port, user, password):
     client = paramiko.SSHClient()
@@ -12,15 +14,15 @@ def createSSHClient(server, port, user, password):
 
 
 def process_frame(client, test_nbr):
-    print "ssh running...\n\n"
 
     put_times = np.array([])
-    txt_times = np.array([])
+    # txt_times = np.array([])
     haralick_times = np.array([])
     get_times = np.array([])
     total_times = np.array([])
 
     sftp = client.open_sftp()
+    print "ssh running...\n\n"
 
     i = 0
     while i < test_nbr:
@@ -45,13 +47,12 @@ def process_frame(client, test_nbr):
         t5 = time.time()
 
         put_times = np.append(put_times, t2 - t1)
-        txt_times = np.append(txt_times, t3 - t2)
+        # txt_times = np.append(txt_times, t3 - t2)
         haralick_times = np.append(haralick_times, t4 - t3)
         get_times = np.append(get_times, t5 - t4)
         total_times = np.append(total_times, t5 - t1)
-
-        print i
-        i = i+1
+        i = i + 1
+        print "Number of recieved features: ", i
 
     stdin, stdout, stderr = client.exec_command('bash')
     stdin.write("touch /dev/shm/breise18/end.txt \n")
@@ -60,18 +61,18 @@ def process_frame(client, test_nbr):
     stdin.flush()
     sftp.close()
 
-    np.save("js4p.npy", put_times)
-    np.save("js4t.npy", txt_times)
-    np.save("js4h.npy", haralick_times)
-    np.save("js4g.npy", get_times)
-    np.save("js4total.npy", total_times)
+    np.save(server + "p.npy", put_times)
+    # np.save("js4t.npy", txt_times)
+    np.save(server + "h.npy", haralick_times)
+    np.save(server + "g.npy", get_times)
+    np.save(server + "total.npy", total_times)
 
     print "PUT\n", put_times, "\n\n"
-    print "TXT\n", txt_times, "\n\n"
+    # print "TXT\n", txt_times, "\n\n"
     print "HARALICK\n", haralick_times, "\n\n"
     print "GET\n", get_times, "\n\n"
     print "TOTAL\n", total_times, "\n\n"
 
 
-ssh = createSSHClient("js4.es.aau.dk", 22, "breise18", "")
+ssh = createSSHClient(server + ".es.aau.dk", 22, "breise18", "")
 process_frame(ssh, 100)
