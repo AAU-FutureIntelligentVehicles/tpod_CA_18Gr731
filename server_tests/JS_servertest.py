@@ -20,12 +20,6 @@ def process_frame(client, test_nbr):
     get_times = np.array([])
     total_times = np.array([])
 
-    # puttimes_path = "/Users/reiserbalazs/Desktop/Project/servertesting/js1put.npy"
-    # txttimes_path = "/Users/reiserbalazs/Desktop/Project/servertesting/js1txt.npy"
-    # haralicktimes_path = "/Users/reiserbalazs/Desktop/Project/servertesting/js1haralick.npy"
-    # gettimes_path = "/Users/reiserbalazs/Desktop/Project/servertesting/js1get.npy"
-    # totaltimes_path = "/Users/reiserbalazs/Desktop/Project/servertesting/js1total.npy"
-
     sftp = client.open_sftp()
 
     i = 0
