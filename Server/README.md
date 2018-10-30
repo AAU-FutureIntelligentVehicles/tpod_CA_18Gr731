@@ -1,8 +1,9 @@
-compute_haralick.py
-- functions for compute haralick features from image
+haralicklib.py
+- functions for haralick feature computation
 
-server_computation.py
-- wait for flag.txt and image
+feature_computation.py
+- wait for image transfer
+- wait for flag.txt to start the process
 - then compute the features
 - save it to features.npy
 - delete flag.txt
