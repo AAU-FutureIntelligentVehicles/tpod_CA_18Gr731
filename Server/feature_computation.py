@@ -1,6 +1,6 @@
 import time
 import os
-import server_haralick
+import haralicklib
 import cv2
 import multiprocessing as mp
 
@@ -8,7 +8,7 @@ start_flag = '/dev/shm/breise18/flag.txt'
 end_flag = '/dev/shm/breise18/end.txt'
 im_path = '/dev/shm/breise18/testy.png'
 feat_path = '/dev/shm/breise18/features.npy'
-random_path = '/dev/shm/breise18/server_haralick.pyc'
+random_path = '/dev/shm/breise18/haralicklib.pyc'
 pool = mp.Pool(mp.cpu_count())
 
 print "calculation running..."
@@ -27,6 +27,6 @@ while True:
         pool.close()
         break
     image = cv2.imread(im_path)
-    features = server_haralick.compute_haralick(image, pool)
+    features = haralicklib.compute_haralick(image, pool)
     features.dump(feat_path)
     os.remove(start_flag)

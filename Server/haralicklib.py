@@ -40,5 +40,4 @@ def compute_haralick(crop_img, pool, windows=None):
     for window, result in zip(windows, haralick_features):
         haralick_arr[window[4], window[5]] = result
     array = haralick_arr / scaling_factor
-    # print(array)
     return array.astype(np.float32)
