@@ -74,5 +74,5 @@ def process_frame(client, test_nbr):
     print "TOTAL\n", total_times, "\n\n"
 
 
-ssh = createSSHClient(server + ".es.aau.dk", 22, "breise18", "")
-process_frame(ssh, 100)
+ssh = createSSHClient(server + ".es.aau.dk", 22, "breise18", "Hopamacs3228")
+process_frame(ssh, 5)
