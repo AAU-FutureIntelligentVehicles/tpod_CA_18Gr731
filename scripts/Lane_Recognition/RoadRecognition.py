@@ -2,22 +2,21 @@ import pyzed.camera as zcam
 import pyzed.defines as sl
 import pyzed.types as tp
 import pyzed.core as core
-import math
+#import math
 import numpy as np
 import sys
-import matplotlib.image as mpimg
+#import matplotlib.image as mpimg
 import cv2
-import glob
+#import glob
 from sklearn.externals import joblib
 from sklearn.svm import LinearSVC
 from sklearn import svm
 from sklearn.preprocessing import StandardScaler
-import pathlib
+#import pathlib
 import mahotas
-import matplotlib.patches as mpatches
 import geometry as g
 import multiprocessing as mp
-from sklearn import datasets, linear_model
+#from sklearn import datasets, linear_model
 
 
 windowSize = 64
@@ -179,6 +178,7 @@ def ori_lookup(pointcloud, point):
 #function to show the intermediate results of the calculated images
 def show(classes, feat_col, point_cloud):
     import matplotlib.pyplot as plt
+    import matplotlib.patches as mpatches
     point_cloud_ = g.rotate_pc(point_cloud)
 
     blank_image = np.zeros((np.shape(feat_col)[0], np.shape(feat_col)[1],3), np.uint8)
