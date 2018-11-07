@@ -1,11 +1,11 @@
 clear all
 
 %takes the specified bag file
-bag = rosbag('test.bag');       
+bag = rosbag('test.bag');
 
 %Isolates specific topic from selected rosbag
-right_bag = bag.select( 'Topic', '/ticks_right');  
-left_bag = bag.select( 'Topic', '/ticks_left');             
+right_bag = bag.select( 'Topic', '/ticks_right');
+left_bag = bag.select( 'Topic', '/ticks_left');      
 gps_bag = bag.select( 'Topic', '/raw_gps');
 
 % Read the messages from specified bags
@@ -55,10 +55,10 @@ for i=1:left_bag.NumMessages
 end
 
 % Encoder datas with timeseries
-left_timeseries = bagleft.timeseries;
-tsleft = setuniformtime(left_timeseries, 'starttime', 0, 'endtime', bagleft.EndTime - bagleft.StartTime);
-right_timeseries = bagright.timeseries;
-tsright = setuniformtime(right_timeseries, 'starttime', 0, 'endtime', bagright.EndTime - bagright.StartTime);
+left_timeseries = left_bag.timeseries;
+tsleft = setuniformtime(left_timeseries, 'starttime', 0, 'endtime', left_bag.EndTime - left_bag.StartTime);
+right_timeseries = right_bag.timeseries;
+tsright = setuniformtime(right_timeseries, 'starttime', 0, 'endtime', right_bag.EndTime - right_bag.StartTime);
 
 % Plot GPS and angle datas
 figure(1);
